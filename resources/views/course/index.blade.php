@@ -1,61 +1,70 @@
 @extends('main')
 @section('content')
     <h1>Courses</h1>
-    <button id="addCourseBtn">Add New Course</button>
+    <button id="addCourseBtn" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add New Course</button>
 
     <!-- Add Course Modal -->
-    <div id="addModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Add New Course</h2>
-            <form id="addForm" action="{{ route('courses.store') }}" method="post">
-                @csrf
-                <div>
-                    <label for="name">Name:</label>
-                    <input type="text" name="name" id="name" required>
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">Add New Course</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div>
-                    <label for="description">Description:</label>
-                    <textarea name="description" id="description" required></textarea>
-                </div>
-                <div>
-                    <label for="picture">Picture:</label>
-                    <input type="text" name="picture" id="picture" required>
-                </div>
-                <div>
-                    <label for="price">Price:</label>
-                    <input type="text" name="price" id="price" required>
-                </div>
-                <div>
-                    <label for="role">Role:</label>
-                    <select name="role" id="role" required>
-                        <option value="free">Free</option>
-                        <option value="paid">Paid</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="validate">Validate:</label>
-                    <select name="validate" id="validate" required>
-                        <option value="lifetime">Lifetime</option>
-                        <option value="one_year">One Year</option>
-                    </select>
-                </div>
-                <div>
-                    <button type="submit">Add Course</button>
-                </div>
-            </form>
+                <form id="addForm" action="{{ route('course.store') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" name="name" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description:</label>
+                            <textarea name="description" id="description" class="form-control" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="picture">Picture:</label>
+                            <input type="text" name="picture" id="picture" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="role">Role:</label>
+                            <select name="role" id="role" class="form-control" required>
+                                <option value="free">Free</option>
+                                <option value="paid">Pago</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price:</label>
+                            <input type="text" name="price" id="price" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="validate">Validate:</label>
+                            <select name="validate" id="validate" class="form-control" required>
+                                <option value="lifetime">Vitalício</option>
+                                <option value="one_year">1 Ano</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="submit" class="btn btn-primary">Add Course</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
     <!-- Course List -->
     <h2>Course List</h2>
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>Name</th>
                 <th>Description</th>
-                <th>Picture</th>
-                <th>Price</th>
+                 <th>Price</th>
                 <th>Role</th>
                 <th>Validate</th>
                 <th>Actions</th>
@@ -66,13 +75,12 @@
                 <tr>
                     <td>{{ $course->name }}</td>
                     <td>{{ $course->description }}</td>
-                    <td>{{ $course->picture }}</td>
-                    <td>{{ $course->price }}</td>
+                     <td>{{ $course->price }}</td>
                     <td>{{ $course->role }}</td>
                     <td>{{ $course->validate }}</td>
                     <td>
-                        <a href="#" class="edit-course" data-id="{{ $course->id }}">Edit</a> |
-                        <a href="#" class="delete-course" data-id="{{ $course->id }}">Delete</a>
+                        <a href="#" class="edit-course btn btn-info" data-id="{{ $course->id }}">Edit</a>
+                        <a href="#" class="delete-course btn btn-danger" data-id="{{ $course->id }}">Delete</a>
                     </td>
                 </tr>
             @endforeach
@@ -81,62 +89,9 @@
 
     <!-- Script for modals and actions -->
     <script>
-        // Get the modals
-        var addModal = document.getElementById("addModal");
-        var editModal = document.getElementById("editModal");
-        var deleteModal = document.getElementById("deleteModal");
-
-        // Get the buttons that opens the modals
-        var addBtn = document.getElementById("addCourseBtn");
-
-        // Get the <span> elements that closes the modals
-        var spans = document.getElementsByClassName("close");
-
-        // When the user clicks on <span> (x), close the modal
-        for (var i = 0; i < spans.length; i++) {
-            spans[i].onclick = function() {
-                addModal.style.display = "none";
-                editModal.style.display = "none";
-                deleteModal.style.display = "none";
-            }
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == addModal || event.target == editModal || event.target == deleteModal) {
-                addModal.style.display = "none";
-                editModal.style.display = "none";
-                deleteModal.style.display = "none";
-            }
-        }
-
-        // Add course modal
-        addBtn.onclick = function() {
-            addModal.style.display = "block";
-        }
-
-        // Edit course modal
-        var editLinks = document.querySelectorAll('.edit-course');
-        editLinks.forEach(function(link) {
-            link.addEventListener('click', function(event) {
-                event.preventDefault();
-                var courseId = link.getAttribute('data-id');
-                var editForm = document.getElementById('editForm');
-                editForm.action = editForm.action.replace(':id', courseId);
-                // Populate fields here if needed
-                editModal.style.display = "block";
-            });
-        });
-
-        // Delete course modal
-        var deleteLinks = document.querySelectorAll('.delete-course');
-        deleteLinks.forEach(function(link) {
-            link.addEventListener('click', function(event) {
-                event.preventDefault();
-                var courseId = link.getAttribute('data-id');
-                var deleteForm = document.getElementById('deleteForm');
-                deleteForm.action = deleteForm.action.replace(':id', courseId);
-                deleteModal.style.display = "block";
+        $(document).ready(function() {
+            $('.modal').on('hidden.bs.modal', function() {
+                $(this).find('form')[0].reset();
             });
         });
     </script>

@@ -24,7 +24,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/course', [CourseController::class, 'index'])->name('course.index');
+Route::get('/courses', [CourseController::class, 'index'])->name('course.index');
+Route::get('/courses/create', [CourseController::class, 'create'])->name('course.create');
+Route::post('/courses', [CourseController::class, 'store'])->name('course.store');
+Route::get('/courses/{course}/edit', [CourseController::class, 'edit'])->name('course.edit');
+Route::put('/courses/{course}', [CourseController::class, 'update'])->name('course.update');
+Route::delete('/courses/{course}', [CourseController::class, 'destroy'])->name('course.destroy');
 
 Route::get('/inscription', [InscriptionController::class, 'index'])->name('inscription.index');
 Route::post('/inscription',[ InscriptionController::class,'store'])->name('inscription.store');
@@ -48,12 +53,6 @@ Route::put('/users/{id}',[UsercController::class,'update'])->name('users.update'
 Route::get('/users/{id}',[UsercController::class,'show'])->name('user.show ');
 Route::delete('/users/{id}',[UsercController::class,'destroy'])->name('users.destroy');
 
-Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
-Route::get('/courses/create', [CourseController::class, 'create'])->name('courses.create');
-Route::post('/courses', [CourseController::class, 'store'])->name('courses.store');
-Route::get('/courses/{course}/edit', [CourseController::class, 'edit'])->name('courses.edit');
-Route::put('/courses/{course}', [CourseController::class, 'update'])->name('courses.update');
-Route::delete('/courses/{course}', [CourseController::class, 'destroy'])->name('courses.destroy');
 
 
 Route::get('/dashboard', function () {
