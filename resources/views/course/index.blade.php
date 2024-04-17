@@ -3,7 +3,6 @@
     <h1>Courses</h1>
     <button id="addCourseBtn" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add New Course</button>
 
-    <!-- Add Course Modal -->
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -57,8 +56,7 @@
         </div>
     </div>
 
-    <!-- Course List -->
-    <h2>Course List</h2>
+     <h2>Course List</h2>
     <table class="table">
         <thead>
             <tr>
@@ -87,8 +85,7 @@
         </tbody>
     </table>
 
-    <!-- Script for modals and actions -->
-    <script>
+     <script>
         $(document).ready(function() {
             $('.modal').on('hidden.bs.modal', function() {
                 $(this).find('form')[0].reset();
