@@ -1,13 +1,13 @@
 @extends('main')
 @section('content')
     <h1>Courses</h1>
-    <button id="addCourseBtn" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add New Course</button>
+    <button id="addCourseBtn" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Adicionar Curso</button>
 
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">Add New Course</h5>
+                    <h5 class="modal-title" id="addModalLabel">Adicionar Course</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

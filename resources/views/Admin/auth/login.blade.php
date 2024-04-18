@@ -120,6 +120,8 @@
                               </div>
                               <div>
                               <button class="btn btn-custon-four btn-primary">Autenticar</button>
+                              <a class="btn btn-custon-four btn-primary" href="{{route ('register')}}">Registrar</a>
+
                             </div>
                             <br><br>
                             <div>

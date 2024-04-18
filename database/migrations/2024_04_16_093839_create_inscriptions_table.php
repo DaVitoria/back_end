@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('inscriptions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
             $table->foreignId('course_id')->constrained();
             $table->date('date_registration');
             $table->string('validated_until');
